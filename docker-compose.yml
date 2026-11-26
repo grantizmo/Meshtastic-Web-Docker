@@ -1,0 +1,13 @@
+services:
+  meshtastic-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        WEB_REPO: ${WEB_REPO:-https://github.com/meshtastic/web.git}
+        WEB_REF: ${WEB_REF:-main}
+    image: meshtastic-web:${WEB_REF:-main}
+    container_name: meshtastic-web
+    ports:
+      - "${WEB_PORT:-8080}:8080"
+    restart: unless-stopped
